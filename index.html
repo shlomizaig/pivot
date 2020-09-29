@@ -45,7 +45,7 @@
             skipEmptyLines: true,
             complete: function(parsed){
                 $("#output").pivotUI(parsed.data, {
-					rows: ["Date Delivery"], cols: ["App Name"],vals:["Users"],aggregatorName: "Sum"
+					rows: ["App Name"], cols: ["Date Delivery"],vals:["Users"],aggregatorName: "Sum"
 					, renderers: renderers,
                 });
             }
