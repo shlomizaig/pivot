@@ -1,0 +1,64 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div>
+BTC : <b id="btc"></b>
+</div>
+<div>
+ETH : <b id="eth"></b>
+</div>
+<div>
+Invested:<b id="invest"></b>
+</div>
+<div>
+<b id="btcc"></b>*BTC + <b id="ethc"></b>*ETH = <b id="balance"></b>
+</div>
+ROI : <b id="roi"></b>
+
+
+
+<script>
+var btcc=0.2;
+var ethc =5;
+var invest=2000;
+var btcp=0;
+var ethp=0;
+
+function get(name){
+if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+return decodeURIComponent(name[1]);
+}
+
+invest = get("invest")||invest;
+btcc = get("btcc")|| btcc;
+ethc = get("ethc")|| ethc;
+updatebalance();
+
+$(document).ready(function(){
+$.ajax({url: "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&e=Coinbase", success: function(result){
+$("#btc").html(result.USD);
+btcp=result.USD;
+updatebalance();
+// console.log(result.USD);
+}});
+$.ajax({url: "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&e=Coinbase", success: function(result){
+$("#eth").html(result.USD);
+ethp=result.USD;
+updatebalance();
+// console.log(result.USD);
+}});
+});
+
+function updatebalance()
+{
+var value = btcp*btcc + ethp * ethc;
+var roi = value/invest * 100;
+roi = roi*10000/10000;
+$("#balance").html(value);
+$("#invest").html(invest);
+$("#btcc").html(btcc);
+$("#ethc").html(ethc);
+$("#roi").html(roi);
+}
+
+
+</script>
