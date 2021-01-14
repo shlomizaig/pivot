@@ -24,7 +24,7 @@ var invest=2100;
 var btcp=0;
 var ethp=0;
 
-function get(name){
+  function get(name){
 if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
 return decodeURIComponent(name[1]);
 }
@@ -59,7 +59,7 @@ $("#invest").html(invest);
 $("#btcc").html(btcc);
 $("#ethc").html(ethc);
 $("#roi").html(roi);
-$("#ratio").html(ethc/btcc);  
+$("#ratio").html(ethp/btcp);  
 }
 
 
