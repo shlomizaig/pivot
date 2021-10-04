@@ -14,15 +14,57 @@ Invested:<b id="invest"></b>
 <b id="btcc"></b>*BTC + <b id="ethc"></b>*ETH = <b id="balance"></b>
 </div>
 ROI : <b id="roi"></b>
+
+
+<div>NIS balance:<b id="nis"></b></div>
+
+<script type="text/javascript" src="https://widget.coinlore.com/widgets/new-widget.js"></script><div class="coinlore-coin-widget" data-mcap="1" data-mcurrency="usd" data-d7="1" data-cwidth="100%" data-rank="1" data-vol="1" data-id="orbs" data-bcolor="#fff" data-tcolor="#333" data-ccolor="#333" data-pcolor="#333" id="orbs"></div>
+
+
   </body></html>
 
 
 <script>
-var btcc=0.243;
-var ethc =6.18
-var invest=2600;
+var btcc=0;
+var ethc =0
+var invest=0;
 var btcp=0;
 var ethp=0;
+u2n = 1;
+
+
+
+if( get("my")==1)
+{
+    btcc=0.243;
+ethc =6.18
+invest=2600;
+btcp=0;
+ethp=0;
+
+}else
+if( get("my")==2)
+{
+    btcc=1.15;
+ethc =6.18
+invest=2600;
+btcp=0;
+ethp=0;
+
+}else
+$("#orbs").hide();
+
+function getUSD2NIS()
+{
+    $.ajax({url:"https://open.er-api.com/v6/latest/USD",success:function(res){
+       u2n =  res.rates.ILS;
+       //alert(u2n);
+       updatebalance();
+    }});
+}
+
+
+getUSD2NIS();
 
   function get(name){
 if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
@@ -60,6 +102,7 @@ $("#btcc").html(btcc);
 $("#ethc").html(ethc);
 $("#roi").html(roi);
 $("#ratio").html(ethp/btcp);  
+$("#nis").html(value*u2n);
 }
 
 
