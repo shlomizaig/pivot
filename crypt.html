@@ -17,6 +17,9 @@ ROI : <b id="roi"></b>
 
 
 <div>NIS balance:<b id="nis"></b></div>
+  
+  
+  <div>Slice=<b id="slice"></b></div>
 
 <script type="text/javascript" src="https://widget.coinlore.com/widgets/new-widget.js"></script><div class="coinlore-coin-widget" data-mcap="1" data-mcurrency="usd" data-d7="1" data-cwidth="100%" data-rank="1" data-vol="1" data-id="orbs" data-bcolor="#fff" data-tcolor="#333" data-ccolor="#333" data-pcolor="#333" id="orbs"></div>
 
@@ -30,6 +33,7 @@ var ethc =0
 var invest=0;
 var btcp=0;
 var ethp=0;
+var orbs=0;
 u2n = 1;
 
 
@@ -89,7 +93,12 @@ ethp=result.USD;
 updatebalance();
 // console.log(result.USD);
 }});
-});
+$.ajax({url: "https://min-api.cryptocompare.com/data/price?fsym=ORBS&tsyms=USD", success: function(result){
+
+orbs=result.USD;
+updatebalance();
+// console.log(result.USD);
+}});});
 
 function updatebalance()
 {
@@ -103,6 +112,7 @@ $("#ethc").html(ethc);
 $("#roi").html(roi);
 $("#ratio").html(ethp/btcp);  
 $("#nis").html(value*u2n);
+$("#slice").html(orbs*1500000*u2n*0.5);  
 }
 
 
